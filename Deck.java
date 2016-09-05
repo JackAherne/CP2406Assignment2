@@ -2,9 +2,8 @@ import java.util.ArrayList;
 
 
 public class Deck {
-//todo fix commas and brackets
 
-    public static void main(String[] args) {
+    public static ArrayList deck() {
 
         ArrayList<cardDescriptions> deck = new ArrayList<>();
 
@@ -182,5 +181,6 @@ public class Deck {
 
         deck.add(new MineralCard("Geothite", "FeO(OH)", "hydroxide", "orthorhombic",
                 "sedimentary", 5.5, 4.3, "1 perfect, 1 good", "moderate", "moderate"));
+    return deck;
     }
 }

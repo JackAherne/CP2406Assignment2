@@ -1,6 +1,7 @@
 /**
  * Created by Jack on 31/08/2016.
  */
+import java.lang.reflect.Array;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,6 +20,7 @@ public class setup {
         }
     }
 
+    /**
     static void shuffleArray(cardDescriptions[] Deck)
     {
         Random rnd = ThreadLocalRandom.current();
@@ -31,6 +33,7 @@ public class setup {
             Deck[i] = a;
         }
     }
+    */
 
     private static int introductionMessage() {
         Scanner userMenuInput = new Scanner(System.in);
@@ -43,12 +46,11 @@ public class setup {
 
     private static void startNewGame() {
         int numberOfPlayers = numberOfPlayers();
-        STGame game = new STGame(numberOfPlayers);
+        ArrayList deck = Deck.deck();
+        STGame game = new STGame(numberOfPlayers, deck);
         //System.out.println(numberOfPLayers());
         game.selectDealer(numberOfPlayers);
         System.out.println("Daeler is player " + game.dealerID);
-
-
     }
 
     public static int numberOfPlayers() {
@@ -63,6 +65,5 @@ public class setup {
             inputNumber = inputChecker.nextInt();
         }
         return inputNumber + 1;
-
     }
 }
