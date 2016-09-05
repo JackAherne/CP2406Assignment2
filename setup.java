@@ -18,22 +18,8 @@ public class setup {
         else if (option == 2) {
             System.exit(0);
         }
-    }
 
-    /**
-    static void shuffleArray(cardDescriptions[] Deck)
-    {
-        Random rnd = ThreadLocalRandom.current();
-        for (int i = Deck.length - 1; i > 0; i--)
-        {
-            int index = rnd.nextInt(i + 1);
-            // Simple swap
-            cardDescriptions a = Deck[index];
-            Deck[index] = Deck[i];
-            Deck[i] = a;
-        }
     }
-    */
 
     private static int introductionMessage() {
         Scanner userMenuInput = new Scanner(System.in);
@@ -46,11 +32,9 @@ public class setup {
 
     private static void startNewGame() {
         int numberOfPlayers = numberOfPlayers();
-        ArrayList deck = Deck.deck();
-        STGame game = new STGame(numberOfPlayers, deck);
-        //System.out.println(numberOfPLayers());
+        STGame game = new STGame(numberOfPlayers);
         game.selectDealer(numberOfPlayers);
-        System.out.println("Daeler is player " + game.dealerID);
+        System.out.println("Dealer is player " + game.dealerID);
     }
 
     public static int numberOfPlayers() {
@@ -59,11 +43,15 @@ public class setup {
         System.out.println("Enter number between 1 and 4: ");
         int inputNumber = opponentNumber.nextInt();
 
-        while (inputNumber < 3 || inputNumber >= 5) {
+        while (inputNumber < 2 || inputNumber >= 5) {
             System.out.println("Please enter number between 1 and 4: ");
             Scanner inputChecker = new Scanner(System.in);
             inputNumber = inputChecker.nextInt();
         }
         return inputNumber + 1;
+    }
+
+    public static void dealCards(Deck deck) {
+        System.out.println(deck);
     }
 }

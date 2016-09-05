@@ -10,17 +10,18 @@ import java.util.ArrayList;
 public class STGame {
     public int numberOfPlayers;
     public int dealerID;
-    public ArrayList deck;
+    public Deck deck;
 
-    public STGame(int numberOfPlayers, ArrayList deck){
+    public STGame(int numberOfPlayers){
         this.numberOfPlayers = numberOfPlayers;
-        this.deck = deck;
+        this.deck = new Deck();
+        System.out.println(deck);
     }
 
     public int selectDealer(int numberOfPlayers) {
         int min = 1;
         Random generator = new Random();
-        dealerID = generator.nextInt(numberOfPlayers - min + 1);
+        dealerID = generator.nextInt(numberOfPlayers - min + 1) + min;
         return dealerID;
     }
 }
