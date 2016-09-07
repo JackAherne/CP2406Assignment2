@@ -1,14 +1,13 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 
 public class Deck {
 
-    private ArrayList<cardDescriptions> cards;
+    private ArrayList<CardDescription> cards;
 
     public Deck() {
-        cards = new ArrayList<cardDescriptions>();
+        cards = new ArrayList<CardDescription>();
         initDeck();
         shuffleDeck();
     }
@@ -199,11 +198,20 @@ public class Deck {
 
     public String toString() {
         StringBuilder cardList = new StringBuilder();
-        for (cardDescriptions card : cards) {
-            //String card = deckArray().toString();
+        for (CardDescription card : cards) {
             System.out.println(card);
             cardList.append(String.valueOf(card.toString()) + "\n");
         }
         return cardList.toString();
+    }
+
+    public ArrayList returnHand(){
+        ArrayList playerHand = new ArrayList<>();
+
+        for (int i = 0; i < 9; i++){
+            playerHand.add(cards.get(0));
+            cards.remove(0);
+        }
+        return playerHand;
     }
 }

@@ -35,6 +35,8 @@ public class setup {
         STGame game = new STGame(numberOfPlayers);
         game.selectDealer(numberOfPlayers);
         System.out.println("Dealer is player " + game.dealerID);
+        game.dealCards(numberOfPlayers);
+        //game.showAllCards();
     }
 
     public static int numberOfPlayers() {
@@ -49,9 +51,5 @@ public class setup {
             inputNumber = inputChecker.nextInt();
         }
         return inputNumber + 1;
-    }
-
-    public static void dealCards(Deck deck) {
-        System.out.println(deck);
     }
 }

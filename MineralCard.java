@@ -1,7 +1,7 @@
 /**
  * Created by Jack on 31/08/2016.
  */
-public class MineralCard extends cardDescriptions{
+public class MineralCard extends CardDescription {
 
     public MineralCard(String title, String chemistry, String classification,
                 String crystalSystem, String occurrence, double hardness,

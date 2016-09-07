@@ -2,7 +2,7 @@
  * Created by Jack on 31/08/2016.
  */
 import java.util.*;
-public class cardDescriptions {
+public class CardDescription {
 
     public String cardTitle;
     public String cardChemistry;
@@ -15,10 +15,10 @@ public class cardDescriptions {
     public String cardCrustalAbundance;
     public String cardEconomicValue;
 
-    public cardDescriptions(String title, String chemistry, String classification,
-                            String crystalSystem, String occurrence, double hardness,
-                            double specificGravity, String cleavage, String crustalAbundance,
-                            String economicValue) {
+    public CardDescription(String title, String chemistry, String classification,
+                           String crystalSystem, String occurrence, double hardness,
+                           double specificGravity, String cleavage, String crustalAbundance,
+                           String economicValue) {
         cardTitle = title;
         cardChemistry = chemistry;
         cardClassification = classification;
@@ -31,7 +31,7 @@ public class cardDescriptions {
         cardEconomicValue = economicValue;
     }
 
-    public cardDescriptions(String title, String economicValue) {
+    public CardDescription(String title, String economicValue) {
         cardTitle = title;
         cardEconomicValue = economicValue;
     }
