@@ -1,14 +1,10 @@
 /**
  * Created by Jack on 31/08/2016.
  */
-import java.lang.reflect.Array;
-import java.util.Random;
+
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.ArrayList;
 
-
-public class setup {
+public class Setup {
 
     public static void main(String[] args) {
         int option = introductionMessage();
@@ -32,21 +28,23 @@ public class setup {
 
     private static void startNewGame() {
         int numberOfPlayers = numberOfPlayers();
+
         STGame game = new STGame(numberOfPlayers);
         game.selectDealer(numberOfPlayers);
         System.out.println("Dealer is player " + game.dealerID);
         game.dealCards(numberOfPlayers);
-        //game.showAllCards();
+        game.playerFirstTurn();
+
     }
 
     public static int numberOfPlayers() {
         System.out.println("How many players would you like to play against?");
         Scanner opponentNumber = new Scanner(System.in);
-        System.out.println("Enter number between 1 and 4: ");
+        System.out.println("Enter number between 2 and 4: ");
         int inputNumber = opponentNumber.nextInt();
 
         while (inputNumber < 2 || inputNumber >= 5) {
-            System.out.println("Please enter number between 1 and 4: ");
+            System.out.println("Please enter number between 2 and 4: ");
             Scanner inputChecker = new Scanner(System.in);
             inputNumber = inputChecker.nextInt();
         }
