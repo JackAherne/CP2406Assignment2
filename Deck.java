@@ -1,3 +1,4 @@
+import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -5,9 +6,11 @@ import java.util.Collections;
 public class Deck {
 
     private ArrayList<CardDescription> cards;
+    public ArrayList<CardDescription> playedCards;
 
     public Deck() {
         cards = new ArrayList<CardDescription>();
+        playedCards = new ArrayList<CardDescription>();
         initDeck();
         shuffleDeck();
     }
@@ -199,7 +202,7 @@ public class Deck {
     public String toString() {
         StringBuilder cardList = new StringBuilder();
         for (CardDescription card : cards) {
-            System.out.println(card);
+            //System.out.println(card);
             cardList.append(String.valueOf(card.toString()) + "\n");
         }
         return cardList.toString();
@@ -208,7 +211,7 @@ public class Deck {
     public ArrayList returnHand(){
         ArrayList playerHand = new ArrayList<>();
 
-        for (int i = 0; i < 9; i++){
+        for (int i = 0; i < 8; i++){
             playerHand.add(cards.get(0));
             cards.remove(0);
         }
