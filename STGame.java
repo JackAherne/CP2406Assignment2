@@ -2,6 +2,8 @@
  * Created by Jack on 4/09/2016.
  */
 
+import javax.smartcardio.Card;
+import java.lang.reflect.Array;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +13,8 @@ public class STGame {
     public int dealerID;
     public Deck deck;
     public Player[] players;
-
+    public CardDescription card;
+    public int currentAttribute;
 
     public STGame(int numberOfPlayers){
         this.numberOfPlayers = numberOfPlayers;
@@ -57,6 +60,7 @@ public class STGame {
         System.out.println(players[0].hand.get(cardChoice));
 
         CardDescription chosenCard = players[0].hand.get(cardChoice);
+        String attribute = "";
 
         if (chosenCard.getClass() == TrumpCard.class) {
             //switch(chosenCard) {
@@ -67,65 +71,99 @@ public class STGame {
         } else {
             System.out.println("Please choose an attribute: 1. Hardness  2. Specific Gravity  3. Cleavage  4. Crustal Abundance  5. Economic Value");
             int attributeChoice = reader.nextInt();
-            //TODO while loop for < 2 || > 5
+            //TODO while loop for < 1 || > 5
             switch (attributeChoice) {
                 case 1:
                     System.out.println("You chose hardness of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardHardness);
-                    return String.valueOf(chosenCard.cardHardness);
+                    attribute = String.valueOf(chosenCard.cardHardness) + " Hardness";
+                    break;
                 case 2:
                     System.out.println("You chose specific gravity of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardSpecificGravity);
-                    return String.valueOf(chosenCard.cardSpecificGravity);
+                    attribute = String.valueOf(chosenCard.cardSpecificGravity) + " SpecificGravity";
+                    break;
                 case 3:
                     System.out.println("You chose cleavage of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardCleavage);
-                    return chosenCard.cardCleavage;
+                    attribute = chosenCard.cardCleavage + " Cleavage";
+                    break;
                 case 4:
                     System.out.println("You chose crustal abundance of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardCrustalAbundance);
-                    return chosenCard.cardCrustalAbundance;
+                    attribute = chosenCard.cardCrustalAbundance + " CurstalAbundance";
+                    break;
                 case 5:
                     System.out.println("You chose economic value of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardEconomicValue);
-                    return chosenCard.cardEconomicValue;
+                    attribute = chosenCard.cardEconomicValue + " EconomicValue";
+                    break;
             }
             players[0].hand.remove(cardChoice);
         }
-        return null;
+        return attribute;
     }
 
-    public String botFirstTurn(int dealerID){
+    public void botFirstTurn(){
         int botChoice = 0;
-        CardDescription botCard = players[dealerID - 1].hand.get(botChoice);
+        String attribute = "";
+        CardDescription botCard = players[1].hand.get(botChoice);
+        deck.playedCards.add(botCard);
 
         if (botCard.getClass() == TrumpCard.class) {
             //switch(botCard) {
             // TODO case: botCard.cardTitle ==
            // }
-            return String.valueOf(0);
         } else {
             Random rand = new Random();
+            //int attributeChoice = rand.nextInt(5);
 
-            int attributeChoice = rand.nextInt(5);
-
-            switch (attributeChoice) {
+            currentAttribute = 1;
+            switch (currentAttribute) {
                 case 1:
                     System.out.println("Bot chose hardness of " + botCard.cardTitle + " which has a value of " + botCard.cardHardness);
-                    return String.valueOf(botCard.cardHardness);
+                    break;
                 case 2:
                     System.out.println("Bot chose specific gravity of " + botCard.cardTitle + " which has a value of " + botCard.cardSpecificGravity);
-                    return String.valueOf(botCard.cardSpecificGravity);
+                    break;
                 case 3:
                     System.out.println("Bot chose cleavage of " + botCard.cardTitle + " which has a value of " + botCard.cardCleavage);
-                    return botCard.cardCleavage;
+                    break;
                 case 4:
                     System.out.println("Bot chose crustal abundance of " + botCard.cardTitle + " which has a value of " + botCard.cardCrustalAbundance);
-                    return botCard.cardCrustalAbundance;
+                    break;
                 case 5:
                     System.out.println("Bot chose economic value of " + botCard.cardTitle + " which has a value of " + botCard.cardEconomicValue);
-                    return botCard.cardEconomicValue;
+                    break;
             }
         }
-        return null;
+        players[1].hand.remove(botChoice);
     }
 
-    public String playerTurn(){
+    public void playerTurn(int currentAttribute){
+        //TODO: return for trump card being played
+
+        Scanner reader = new Scanner(System.in);
+
+        if (currentAttribute == 1) {
+
+            String botAttrValue = Double.toString(deck.playedCards.get(0).cardHardness);
+
+            System.out.println("The attribute is Hardness, input a number that relates to a card in your hand:");
+            System.out.println(players[0].hand);
+
+            int cardChoice = Integer.parseInt(reader.next());
+            String playerAttrValue = Double.toString(players[0].hand.get(cardChoice).cardHardness);
+            System.out.println(playerAttrValue + " " + botAttrValue);
+           // boolean compareResult = card.compareCards(playerAttrValue, botAttrValue);
+           // System.out.println(compareResult);
+            while (card.compareCards(playerAttrValue, botAttrValue) == false){
+                System.out.println("That cards hardness is lower than the played card, choose again:");
+                cardChoice = Integer.parseInt(reader.next());
+                playerAttrValue = Double.toString(players[0].hand.get(cardChoice).cardHardness);
+                card.compareCards(playerAttrValue, botAttrValue);
+            }
+            deck.playedCards.remove(0);
+            deck.playedCards.add(players[0].hand.get(cardChoice));
+        }
+    }
+
+    public void botTurn(){
 
     }
 }
