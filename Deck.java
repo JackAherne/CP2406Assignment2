@@ -9,6 +9,7 @@ public class Deck {
     public ArrayList<CardDescription> playedCards;
 
     public Deck() {
+
         cards = new ArrayList<CardDescription>();
         playedCards = new ArrayList<CardDescription>();
         initDeck();
@@ -195,20 +196,23 @@ public class Deck {
     }
 
     public ArrayList shuffleDeck(){
+
         Collections.shuffle(cards);
         return cards;
     }
 
     public String toString() {
+
         StringBuilder cardList = new StringBuilder();
+
         for (CardDescription card : cards) {
-            //System.out.println(card);
             cardList.append(String.valueOf(card.toString()) + "\n");
         }
         return cardList.toString();
     }
 
     public ArrayList returnHand(){
+
         ArrayList playerHand = new ArrayList<>();
 
         for (int i = 0; i < 8; i++){
@@ -216,5 +220,24 @@ public class Deck {
             cards.remove(0);
         }
         return playerHand;
+    }
+
+    public CardDescription passTurn() {
+        if (isDeckEmpty()) {
+            System.out.println("No cards left in the deck. Game Over.");
+        }
+        CardDescription cardPass = cards.get(0);
+        cards.remove(cardPass);
+        return cardPass;
+    }
+
+    public boolean isDeckEmpty() {
+        boolean isEmpty;
+        if (cards.isEmpty()) {
+            isEmpty = true;
+        }
+        else {isEmpty = false;}
+
+        return isEmpty;
     }
 }
