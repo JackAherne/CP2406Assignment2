@@ -10,7 +10,7 @@ public class MineralCard extends CardDescription {
         super(title, chemistry, classification, crystalSystem, occurrence, hardness, specificGravity, cleavage, crustalAbundance, economicValue);
     }
 
-
+    //Specifies how to print the mineral cards
     public String toString() {
         return "Name: " + cardTitle + " " + "Chemistry: " + cardChemistry + "  " + "Classification: " + cardClassification + "  " +"Crystal System: " + cardCrystalSystem + "  " + "Occurence: " + cardOccurrence + "  " + "Hardness: " + cardHardness + "  " + "Specific Gravity: " + cardSpecificGravity + "  " + "Cleavage: " + cardCleavage + "  " + "Crustal Abundance: "+ cardCrustalAbundance + "  " + "Economic Value: " + cardEconomicValue + "\n\n";
     }

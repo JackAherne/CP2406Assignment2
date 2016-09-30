@@ -35,14 +35,15 @@ public class Player {
             System.out.println(human.hand.get(cardChoice));
 
             CardDescription chosenCard = human.hand.get(cardChoice);
+            //Won't let the user play a trump card on their first turn.
             if (chosenCard.getClass() == TrumpCard.class) {
                 while (chosenCard.getClass() == TrumpCard.class) {
                     System.out.println("Can't play a trump card on the opening hand. Choose another card.");
                     cardChoice = Integer.parseInt((reader.next()));
                     chosenCard = human.hand.get(cardChoice);
-                    //playTrump(chosenCard);
                 }
             }
+            //Asks the user what category they want to play by and sets the attribute to what they choose.
             System.out.println("Please choose an attribute: 1. Hardness  2. Specific Gravity  3. Cleavage  4. Crustal Abundance  5. Economic Value");
             int attributeChoice = reader.nextInt();
             while (attributeChoice < 1 || attributeChoice > 5) {
@@ -196,6 +197,7 @@ public class Player {
                     }
                 }
             } else if (currentAttribute.equals("Cleavage")) {
+                //Creates a dictionary of values relating to attributes that have string values so they can be compared.
                 Map<String, Integer> cleavageDictionary = new HashMap<String, Integer>();
                 cleavageDictionary.put("none", 0);
                 cleavageDictionary.put("poor/none", 1);
@@ -246,6 +248,7 @@ public class Player {
                     }
                 }
             } else if (currentAttribute.equals("Crustal Abundance")) {
+                //Creates a dictionary of values relating to attributes that have string values so they can be compared.
                 Map<String, Integer> crustalAbundanceDictionary = new HashMap<String, Integer>();
                 crustalAbundanceDictionary.put("ultratrace", 0);
                 crustalAbundanceDictionary.put("trace", 1);
@@ -287,6 +290,7 @@ public class Player {
                     }
                 }
             } else if (currentAttribute.equals("Economic Value")) {
+                //Creates a dictionary of values relating to attributes that have string values so they can be compared.
                 Map<String, Integer> economicValueDictionary = new HashMap<String, Integer>();
                 economicValueDictionary.put("trivial", 0);
                 economicValueDictionary.put("low", 1);

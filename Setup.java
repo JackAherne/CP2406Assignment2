@@ -3,11 +3,13 @@
  */
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class Setup {
 
     public static void main(String[] args) {
 
+        //Begins the game
         int option = introductionMessage();
 
         if (option == 1) {
@@ -20,7 +22,7 @@ public class Setup {
     }
 
     private static int introductionMessage() {
-
+        //Welcomes user to the game
         Scanner userMenuInput = new Scanner(System.in);
         System.out.println("Welcome to the Mineral Super Trumps game.");
         System.out.println("1. Start game");
@@ -31,19 +33,27 @@ public class Setup {
 
     private static void startNewGame() {
         boolean gameOver = false;
+        Random rand = new Random();
+        int number = rand.nextInt(1);
         int numberOfPlayers = getNumberOfPlayers();
         STGame game = new STGame(numberOfPlayers);
         int dealerID = game.selectDealer(numberOfPlayers);
         int i;
+
+        //Determines first player
         int firstPlayer = dealerID - 1;
         if (dealerID - 1 == -1) {
             firstPlayer = numberOfPlayers;
         }
         System.out.println("Dealer is player " + firstPlayer + "\n");
         game.dealCards(numberOfPlayers);
-
-        game.playerFirstTurn();
-
+        if (number == 0) {
+            game.playerFirstTurn();
+        }
+        else {
+            game.botFirstTurn(0);
+        }
+        //Game loop so that the game plays until exit condition is met
         while (!gameOver) {
             for (i = 0; i < game.numberOfPlayers; i++) {
                 game.botTurn(i);
@@ -55,7 +65,7 @@ public class Setup {
     }
 
     public static int getNumberOfPlayers() {
-
+        //Asks the player for the number of bots to play against and makes sure their input is valid
         System.out.println("How many players would you like to play against?");
         Scanner opponentNumber = new Scanner(System.in);
         System.out.println("Enter number between 2 and 4: ");

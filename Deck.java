@@ -195,12 +195,14 @@ public class Deck {
 
     }
 
+    //Shuffles the deck.
     public ArrayList shuffleDeck(){
 
         Collections.shuffle(cards);
         return cards;
     }
 
+    //Defines how to print cards of the deck.
     public String toString() {
 
         StringBuilder cardList = new StringBuilder();
@@ -231,6 +233,7 @@ public class Deck {
         return cardPass;
     }
 
+    //Checks if the deck is empty and subsequntly ends the game if it is.
     public boolean isDeckEmpty() {
         boolean isEmpty;
         if (cards.isEmpty()) {

@@ -52,6 +52,7 @@ public class CardDescription {
         return compare;
     }
 
+    //Tries to convert the input to a double
     private static boolean tryParseInt(String firstAttrValue, String secondAttrValue) {
         try {
             Double.parseDouble(firstAttrValue);

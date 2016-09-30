@@ -6,6 +6,7 @@ public class TrumpCard extends CardDescription {
         super(name, economicValue);
     }
 
+    //Defines how to print the cards
     public String toString() {
         return "Card Name: " + cardTitle + "  " + "Category: " + cardEconomicValue + "\n" ;
     }

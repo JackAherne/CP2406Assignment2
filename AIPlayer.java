@@ -9,6 +9,7 @@ public class AIPlayer extends Player{
 
 
     public void botFirstTurnPlayCard(int firstPlayer) {
+        //Makes sure there are no cards in the played cards deck
         try {
             deck.playedCards.remove(0);
 
@@ -54,6 +55,7 @@ public class AIPlayer extends Player{
 
 
     public void botPlayCard(int i) {
+        //Decides what card the bot plays depending on current attribute.
         int x;
         for (x = 0; x < bots[i].hand.size() + 1; x++) {
             if (currentAttribute.equals("Hardness")) {
@@ -105,6 +107,7 @@ public class AIPlayer extends Player{
                 }
             }
             else if(currentAttribute.equals("Cleavage")){
+                //Creates a dictionary of values relating to attributes that have string values so they can be compared.
                 Map<String, Integer> cleavageDictionary = new HashMap<String, Integer>();
                 cleavageDictionary.put("none", 0);
                 cleavageDictionary.put("poor/none", 1);
@@ -147,6 +150,7 @@ public class AIPlayer extends Player{
                 }
             }
             else if (currentAttribute.equals("CrustalAbundance")) {
+                //Creates a dictionary of values relating to attributes that have string values so they can be compared.
                 Map<String, Integer> crustalAbundanceDictionary = new HashMap<String, Integer>();
                 crustalAbundanceDictionary.put("ultratrace", 0);
                 crustalAbundanceDictionary.put("trace", 1);
@@ -179,6 +183,7 @@ public class AIPlayer extends Player{
                 }
             }
             else if (currentAttribute.equals("EconomicValue")) {
+                //Creates a dictionary of values relating to attributes that have string values so they can be compared.
                 Map<String, Integer> economicValueDictionary = new HashMap<String, Integer>();
                 economicValueDictionary.put("trivial", 0);
                 economicValueDictionary.put("low", 1);
@@ -221,6 +226,7 @@ public class AIPlayer extends Player{
         }
     }
 
+    //If the bot has no mineral card to play, it checks to see if it has a trump card and will play that card
     public boolean botPlayTrump(int i) {
         if (!deck.playedCards.isEmpty()) {
             deck.playedCards.remove(0);

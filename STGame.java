@@ -17,6 +17,7 @@ public class STGame {
         this.deck = new Deck();
     }
 
+    //Chooses which player will be the dealer from a random number in the range of players
     public int selectDealer(int numberOfPlayers) {
 
         Random generator = new Random();
@@ -25,10 +26,12 @@ public class STGame {
     }
 
     public void dealCards(int numberOfPlayers){
+        //Creates the player and bot objects
         Player.human = new Player();
         AIPlayer.bots = new AIPlayer[numberOfPlayers];
         ArrayList<CardDescription> hand;
 
+        //Gives the player and bots a hand
         hand = deck.returnHand();
         Player.human.setHand(hand);
         for (int i = 0; i < numberOfPlayers; i++){
@@ -37,7 +40,7 @@ public class STGame {
             AIPlayer.bots[i].setHand(hand);
         }
     }
-
+    //Functions that are used to get the turns from the player and bots
     public void playerFirstTurn() {
         Player.human.playerFirstTurnPlayCard();
     }
@@ -55,6 +58,7 @@ public class STGame {
         AIPlayer.bots[i].botPlayCard(i);
     }
 
+    //Checks if either a hand or the deck is empty, used to exit the games while loop
     public boolean isGameOver(boolean gameOver) {
         if (Player.human.hand.size() == 0) {
             System.out.println("Congratulations, you won!");
