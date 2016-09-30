@@ -36,24 +36,21 @@ public class CardDescription {
         cardEconomicValue = economicValue;
     }
 
-   public static boolean compareCards(String firstAttrValue, String secondAttrValue){
-       boolean compare = true;
-       System.out.println(firstAttrValue + " " + secondAttrValue);
-       if (tryParseInt(firstAttrValue, secondAttrValue)) {
-           double firstAttrValueInt = Double.parseDouble(firstAttrValue);
-           double secondAttrValueInt = Double.parseDouble(secondAttrValue);
-           if (firstAttrValueInt <= secondAttrValueInt) {
-               compare = false;
-           }
-           else{
-               compare = true;
-           }
-       }
-       else {
-           //TODO: assign numbers to string comparisons
-       }
-       return compare;
-   }
+    public static boolean compareCards(String firstAttrValue, String secondAttrValue){
+        boolean compare = true;
+        System.out.println("Compare cards First Attribute: " + firstAttrValue + " Second Attribute: " + secondAttrValue);
+        if (tryParseInt(firstAttrValue, secondAttrValue)) {
+            double firstAttrValueInt = Double.parseDouble(firstAttrValue);
+            double secondAttrValueInt = Double.parseDouble(secondAttrValue);
+            if (firstAttrValueInt <= secondAttrValueInt) {
+                compare = false;
+            }
+            else{
+                compare = true;
+            }
+        }
+        return compare;
+    }
 
     private static boolean tryParseInt(String firstAttrValue, String secondAttrValue) {
         try {
