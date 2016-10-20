@@ -2,13 +2,20 @@
  * Created by Jack on 31/08/2016.
  */
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Random;
 
 public class Setup {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GUI.createAndShowGUI();
+            }
+        });
         //Begins the game
         int option = introductionMessage();
 
@@ -31,7 +38,7 @@ public class Setup {
         return userInput;
     }
 
-    private static void startNewGame() {
+    private static void startNewGame() throws IOException {
         boolean gameOver = false;
         Random rand = new Random();
         int number = rand.nextInt(1);

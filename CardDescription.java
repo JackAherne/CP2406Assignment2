@@ -1,7 +1,10 @@
 /**
  * Created by Jack on 31/08/2016.
  */
-import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 public class CardDescription {
 
     public String cardTitle;
@@ -14,11 +17,12 @@ public class CardDescription {
     public String cardCleavage;
     public String cardCrustalAbundance;
     public String cardEconomicValue;
+    public BufferedImage cardPicture;
 
     public CardDescription(String title, String chemistry, String classification,
                            String crystalSystem, String occurrence, double hardness,
                            double specificGravity, String cleavage, String crustalAbundance,
-                           String economicValue) {
+                           String economicValue, BufferedImage cardPic) {
         cardTitle = title;
         cardChemistry = chemistry;
         cardClassification = classification;
@@ -29,11 +33,13 @@ public class CardDescription {
         cardCleavage = cleavage;
         cardCrustalAbundance = crustalAbundance;
         cardEconomicValue = economicValue;
+        cardPicture = cardPic;
     }
 
-    public CardDescription(String title, String economicValue) {
+    public CardDescription(String title, String economicValue, BufferedImage cardPic) {
         cardTitle = title;
         cardEconomicValue = economicValue;
+        cardPicture = cardPic;
     }
 
     public static boolean compareCards(String firstAttrValue, String secondAttrValue){
@@ -61,6 +67,12 @@ public class CardDescription {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public ImageIcon getCardImage() {
+        Image scaledImg = cardPicture.getScaledInstance(100, 140, Image.SCALE_SMOOTH);
+        ImageIcon imgIcon = new ImageIcon(scaledImg);
+        return imgIcon;
     }
 }
 

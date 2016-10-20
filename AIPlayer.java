@@ -56,8 +56,8 @@ public class AIPlayer extends Player{
 
     public void botPlayCard(int i) {
         //Decides what card the bot plays depending on current attribute.
-        int x;
-        for (x = 0; x < bots[i].hand.size() + 1; x++) {
+
+        for (int x = 0; x < bots[i].hand.size() + 1; x++) {
             if (currentAttribute.equals("Hardness")) {
                 String secondAttrValue = Double.toString(deck.playedCards.get(0).cardHardness);
                 String firstAttrValue;

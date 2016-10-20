@@ -2,6 +2,7 @@
  * Created by Jack on 4/09/2016.
  */
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class STGame {
     public static Deck deck;
     public static CardDescription card;
 
-    public STGame(int numberOfPlayers){
+    public STGame(int numberOfPlayers) throws IOException {
         this.numberOfPlayers = numberOfPlayers;
         this.deck = new Deck();
     }
@@ -39,6 +40,7 @@ public class STGame {
             hand = deck.returnHand();
             AIPlayer.bots[i].setHand(hand);
         }
+        System.out.println(Player.human.hand);
     }
     //Functions that are used to get the turns from the player and bots
     public void playerFirstTurn() {
