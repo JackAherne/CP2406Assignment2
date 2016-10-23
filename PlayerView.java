@@ -14,6 +14,7 @@ public class PlayerView extends JPanel {
         addCards();
     }
 
+    //Adds cards to the PlayerView
     private void addCards() {
 
         ArrayList<CardDescription> hand = Player.human.hand;

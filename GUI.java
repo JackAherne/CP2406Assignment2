@@ -20,7 +20,7 @@ public class GUI extends JPanel implements ActionListener {
 
     static void createAndShowGUI() {
 
-
+        //Sets up the welcome screen.
         Font comicSans = new Font("Comic Sans MS", Font.PLAIN, 20);
         JPanel humanPanel = new JPanel();
         humanPanel.setLayout(new BorderLayout());
@@ -70,6 +70,7 @@ public class GUI extends JPanel implements ActionListener {
         numOfPlayers.setColumns(5);
         centerPanel.add(numOfPlayers);
 
+        //Sets up the game screen after new game has been pressed.
         JButton newGameButton = new JButton("New Game");
         newGameButton.setFont(comicSans);
         newGameButton.addActionListener(e -> {
@@ -127,6 +128,7 @@ public class GUI extends JPanel implements ActionListener {
 
             PlayerView view = new PlayerView(humanPlayer);
 
+            //Changes the playing attribute to whatever button is pressed.
             JButton hardness = new JButton("Hardness");
             hardness.setFont(comicSans);
             hardness.addActionListener(e1 -> {
@@ -174,6 +176,7 @@ public class GUI extends JPanel implements ActionListener {
             group.add(crustalAbundance);
             group.add(economicValue);
 
+            //Passes the persons turned if the pass turn button is pressed.
             JButton passButton = new JButton("Pass");
             passButton.setFont(comicSans);
             passButton.addActionListener(new ActionListener() {
@@ -221,6 +224,7 @@ public class GUI extends JPanel implements ActionListener {
 
     }
 
+    //Adds cards to the played cards deck.
     public void addCardToDeck(CardDescription card) {
         cardDeck.setHorizontalAlignment(JLabel.CENTER);
         ImageIcon imgCard = card.getDeckImage();

@@ -22,7 +22,7 @@ public class ShowCard extends JPanel{
         label.setBackground(Color.CYAN);
         add(label);
 
-
+        //Gets the card images for the human players hand.
         addMouseListener(new MouseInputAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

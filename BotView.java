@@ -16,6 +16,7 @@ public class BotView extends JPanel{
             addCards();
         }
 
+        //Adds card backs to the bot hands to see how many cards they have left.
         private void addCards() throws IOException {
 
             ArrayList<CardDescription> hand = player.getHand();
