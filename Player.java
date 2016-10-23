@@ -1,6 +1,7 @@
 /**
  * Created by Jack on 7/09/2016.
  */
+import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class Player {
 
-    public static String currentAttribute;
+    public static String currentAttribute = "Hardness";
     public static Player human;
     public static AIPlayer[] bots;
     public ArrayList<CardDescription> hand;
@@ -20,7 +21,7 @@ public class Player {
     }
 
 
-    public void playerFirstTurnPlayCard() {
+    public void playerFirstTurnPlayCard(CardDescription card) {
         try {
             deck.playedCards.remove(0);
 
@@ -30,8 +31,15 @@ public class Player {
             System.out.println("Input a number relating to card in hand position: ");
 
             Scanner reader = new Scanner(System.in);
-            int cardChoice = Integer.parseInt(reader.next());
+            int cardChoice = 0;
 
+
+            for (int i = 0; i< human.hand.size(); i++)
+            {
+                if (card.cardTitle.equals(human.hand.get(i).cardTitle)) {
+                    cardChoice = i;
+                }
+            }
             System.out.println(human.hand.get(cardChoice));
 
             CardDescription chosenCard = human.hand.get(cardChoice);
@@ -43,49 +51,57 @@ public class Player {
                     chosenCard = human.hand.get(cardChoice);
                 }
             }
-            //Asks the user what category they want to play by and sets the attribute to what they choose.
-            System.out.println("Please choose an attribute: 1. Hardness  2. Specific Gravity  3. Cleavage  4. Crustal Abundance  5. Economic Value");
-            int attributeChoice = reader.nextInt();
-            while (attributeChoice < 1 || attributeChoice > 5) {
-                System.out.println("Please enter: 1. Hardness  2. Specific Gravity  3. Cleavage  4. Crustal Abundance  5. Economic Value");
-                attributeChoice = reader.nextInt();
-            }
 
-            switch (attributeChoice) {
-                case 1:
-                    System.out.println("You chose hardness of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardHardness + ".");
-                    Player.currentAttribute = "Hardness";
-                    break;
-                case 2:
-                    System.out.println("You chose specific gravity of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardSpecificGravity + ".");
-                    Player.currentAttribute = "SpecificGravity";
-                    break;
-                case 3:
-                    System.out.println("You chose cleavage of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardCleavage + ".");
-                    Player.currentAttribute = "Cleavage";
-                    break;
-                case 4:
-                    System.out.println("You chose crustal abundance of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardCrustalAbundance + ".");
-                    Player.currentAttribute = "CrustalAbundance";
-                    break;
-                case 5:
-                    System.out.println("You chose economic value of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardEconomicValue + ".");
-                    Player.currentAttribute = "EconomicValue";
-                    break;
-            }
+            //Asks the user what category they want to play by and sets the attribute to what they choose.
+//            System.out.println("Please choose an attribute: 1. Hardness  2. Specific Gravity  3. Cleavage  4. Crustal Abundance  5. Economic Value");
+//            String attributeChoice = setAttribute();
+////            while (attributeChoice < 1 || attributeChoice > 5) {
+////                System.out.println("Please enter: 1. Hardness  2. Specific Gravity  3. Cleavage  4. Crustal Abundance  5. Economic Value");
+////                attributeChoice = reader.nextInt();
+////            }
+//
+//            switch (attributeChoice) {
+//                case "Hardness":
+//                    System.out.println("You chose hardness of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardHardness + ".");
+//                    Player.currentAttribute = "Hardness";
+//                    break;
+//                case "Specific Gravity":
+//                    System.out.println("You chose specific gravity of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardSpecificGravity + ".");
+//                    Player.currentAttribute = "SpecificGravity";
+//                    break;
+//                case "Cleavage":
+//                    System.out.println("You chose cleavage of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardCleavage + ".");
+//                    Player.currentAttribute = "Cleavage";
+//                    break;
+//                case "Crustal Abundance":
+//                    System.out.println("You chose crustal abundance of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardCrustalAbundance + ".");
+//                    Player.currentAttribute = "CrustalAbundance";
+//                    break;
+//                case "Economic Value":
+//                    System.out.println("You chose economic value of " + chosenCard.cardTitle + " which has a value of " + chosenCard.cardEconomicValue + ".");
+//                    Player.currentAttribute = "EconomicValue";
+//                    break;
+//            }
             deck.playedCards.add(human.hand.get(cardChoice));
             human.hand.remove(cardChoice);
             System.out.println("The current attribute is: " + currentAttribute);
         }
     }
 
+    public void setAttribute(String attribute) {
+        Player.currentAttribute = attribute;
+        System.out.println(currentAttribute);
+    }
 
-    public void playerPlayCard() {
+
+    public CardDescription playerPlayCard(CardDescription card) {
         System.out.println(human.hand);
+        CardDescription humanCard = null;
         String firstAttrValue;
         Scanner reader = new Scanner(System.in);
         System.out.println("0. To pass.\n 1. To play.");
-        int passOrPlay = Integer.parseInt(reader.next());
+//        int passOrPlay = Integer.parseInt(reader.next());
+        int passOrPlay = 1;
 
         if (passOrPlay == 0) {
             human.hand.add(deck.passTurn());
@@ -99,13 +115,20 @@ public class Player {
                 System.out.println("The attribute is Hardness, play a card with a hardness higher than " + secondAttrValue + " or a Trump Card to change the attribute.\n or type pass to pass");
                 System.out.println(human.hand);
 
-                String cardChoiceCheck = String.valueOf(reader.next());
+
+
+                int cardChoice = 0;
+                String cardChoiceCheck = String.valueOf(cardChoice);
 
                 if (cardChoiceCheck.equals("pass")) {
                     System.out.println("You have passed and picked up " + human.hand.get(human.hand.size() - 1));
                     human.hand.add(deck.passTurn());
                 } else {
-                    int cardChoice = Integer.parseInt(cardChoiceCheck);
+                    for (int i = 0; i < human.hand.size(); i++) {
+                        if (card.cardTitle.equals(human.hand.get(i).cardTitle)) {
+                            cardChoice = i;
+                        }
+                    }
 
                     CardDescription chosenCard = human.hand.get(cardChoice);
 
@@ -120,8 +143,9 @@ public class Player {
                             System.out.println("That cards hardness is lower than the played card, choose again:");
                             cardChoice = Integer.parseInt(reader.next());
                             firstAttrValue = Double.toString(human.hand.get(cardChoice).cardHardness);
-                            card.compareCards(firstAttrValue, secondAttrValue);
+                            CardDescription.compareCards(firstAttrValue, secondAttrValue);
                         }
+                        humanCard = human.hand.get(cardChoice);
                         deck.playedCards.remove(0);
                         deck.playedCards.add(human.hand.get(cardChoice));
                         human.hand.remove(cardChoice);
@@ -154,8 +178,9 @@ public class Player {
                             System.out.println("That cards hardness is lower than the played card, choose again:");
                             cardChoice = Integer.parseInt(reader.next());
                             firstAttrValue = Double.toString(human.hand.get(cardChoice).cardSpecificGravity);
-                            card.compareCards(firstAttrValue, secondAttrValue);
+                            CardDescription.compareCards(firstAttrValue, secondAttrValue);
                         }
+                        humanCard = human.hand.get(cardChoice);
                         deck.playedCards.remove(0);
                         deck.playedCards.add(human.hand.get(cardChoice));
                         human.hand.remove(cardChoice);
@@ -189,8 +214,9 @@ public class Player {
                             System.out.println("That cards Specific Gravity is lower than the played card, choose again:");
                             cardChoice = Integer.parseInt(reader.next());
                             firstAttrValue = Double.toString(human.hand.get(cardChoice).cardSpecificGravity);
-                            card.compareCards(firstAttrValue, secondAttrValue);
+                            CardDescription.compareCards(firstAttrValue, secondAttrValue);
                         }
+                        humanCard = human.hand.get(cardChoice);
                         deck.playedCards.remove(0);
                         deck.playedCards.add(human.hand.get(cardChoice));
                         human.hand.remove(cardChoice);
@@ -240,8 +266,9 @@ public class Player {
                             System.out.println("That cards Cleavage is lower than the played card, choose again:");
                             cardChoice = Integer.parseInt(reader.next());
                             firstAttrValue = Integer.toString(cleavageDictionary.get(chosenCard.cardCleavage));
-                            card.compareCards(firstAttrValue, secondAttrValue);
+                            CardDescription.compareCards(firstAttrValue, secondAttrValue);
                         }
+                        humanCard = human.hand.get(cardChoice);
                         deck.playedCards.remove(0);
                         deck.playedCards.add(human.hand.get(cardChoice));
                         human.hand.remove(cardChoice);
@@ -282,8 +309,9 @@ public class Player {
                             System.out.println("That cards Crustal Abundance is lower than the played card, choose again:");
                             cardChoice = Integer.parseInt(reader.next());
                             firstAttrValue = Integer.toString(crustalAbundanceDictionary.get(chosenCard.cardCrustalAbundance));
-                            card.compareCards(firstAttrValue, secondAttrValue);
+                            CardDescription.compareCards(firstAttrValue, secondAttrValue);
                         }
+                        humanCard = human.hand.get(cardChoice);
                         deck.playedCards.remove(0);
                         deck.playedCards.add(human.hand.get(cardChoice));
                         human.hand.remove(cardChoice);
@@ -324,8 +352,9 @@ public class Player {
                             System.out.println("That cards Economic Value is lower than the played card, choose again:");
                             cardChoice = Integer.parseInt(reader.next());
                             firstAttrValue = Integer.toString(economicValueDictionary.get(chosenCard.cardCrustalAbundance));
-                            card.compareCards(firstAttrValue, secondAttrValue);
+                            CardDescription.compareCards(firstAttrValue, secondAttrValue);
                         }
+                        humanCard = human.hand.get(cardChoice);
                         deck.playedCards.remove(0);
                         deck.playedCards.add(human.hand.get(cardChoice));
                         human.hand.remove(cardChoice);
@@ -333,6 +362,7 @@ public class Player {
                 }
             }
         }
+        return humanCard;
     }
 
 
@@ -392,5 +422,11 @@ public class Player {
             System.out.println("You have chosen " + chosenCard.cardTitle + " which changes the category to " + chosenCard.cardEconomicValue + ".");
             currentAttribute = chosenCard.cardEconomicValue;
         }
+    }
+    public void pass() {
+        CardDescription card = deck.passTurn();
+        System.out.println(card);
+        System.out.println(human.hand);
+        human.hand.add(card);
     }
 }

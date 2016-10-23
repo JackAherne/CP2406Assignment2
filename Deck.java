@@ -178,10 +178,7 @@ public class Deck {
     //Checks if the deck is empty and subsequntly ends the game if it is.
     public boolean isDeckEmpty() {
         boolean isEmpty;
-        if (cards.isEmpty()) {
-            isEmpty = true;
-        }
-        else {isEmpty = false;}
+        isEmpty = cards.isEmpty();
 
         return isEmpty;
     }

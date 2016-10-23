@@ -54,12 +54,12 @@ public class Setup {
         }
         System.out.println("Dealer is player " + firstPlayer + "\n");
         game.dealCards(numberOfPlayers);
-        if (number == 0) {
-            game.playerFirstTurn();
-        }
-        else {
-            game.botFirstTurn(0);
-        }
+//        if (number == 0) {
+//            game.playerFirstTurn(card);
+//        }
+//        else {
+//            game.botFirstTurn(0);
+//        }
         //Game loop so that the game plays until exit condition is met
         while (!gameOver) {
             for (i = 0; i < game.numberOfPlayers; i++) {

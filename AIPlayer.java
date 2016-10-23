@@ -2,6 +2,7 @@
  * Created by Jack on 10/09/2016.
  */
 import javax.smartcardio.Card;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Map;
@@ -54,9 +55,9 @@ public class AIPlayer extends Player{
     }
 
 
-    public void botPlayCard(int i) {
+    public CardDescription botPlayCard(int i) {
         //Decides what card the bot plays depending on current attribute.
-
+        CardDescription botCard = card;
         for (int x = 0; x < bots[i].hand.size() + 1; x++) {
             if (currentAttribute.equals("Hardness")) {
                 String secondAttrValue = Double.toString(deck.playedCards.get(0).cardHardness);
@@ -75,6 +76,7 @@ public class AIPlayer extends Player{
 
                             System.out.println("Bot played " + bots[i].hand.get(x));
 
+                            botCard = bots[i].hand.get(x);
                             bots[i].hand.remove(x);
                             x = bots[i].hand.size() + 2;
                         } else {
@@ -100,6 +102,7 @@ public class AIPlayer extends Player{
 
                             System.out.println("Bot played " + bots[i].hand.get(x));
 
+                            botCard = bots[i].hand.get(x);
                             bots[i].hand.remove(x);
                             x = bots[i].hand.size() + 2;
                         }
@@ -142,6 +145,7 @@ public class AIPlayer extends Player{
                             deck.playedCards.add(bots[i].hand.get(x));
 
                             System.out.println("Bot played " + bots[i].hand.get(x));
+                            botCard = bots[i].hand.get(x);
 
                             bots[i].hand.remove(x);
                             x = bots[i].hand.size() + 2;
@@ -176,6 +180,8 @@ public class AIPlayer extends Player{
 
                             System.out.println("Bot played " + bots[i].hand.get(x));
 
+                            botCard = bots[i].hand.get(x);
+
                             bots[i].hand.remove(x);
                             x = bots[i].hand.size() + 2;
                         }
@@ -209,6 +215,8 @@ public class AIPlayer extends Player{
 
                             System.out.println("Bot played " + bots[i].hand.get(x));
 
+                            botCard = bots[i].hand.get(x);
+
                             bots[i].hand.remove(x);
                             x = bots[i].hand.size() + 2;
                         }
@@ -224,6 +232,7 @@ public class AIPlayer extends Player{
                 }
             }
         }
+        return botCard;
     }
 
     //If the bot has no mineral card to play, it checks to see if it has a trump card and will play that card
@@ -289,5 +298,16 @@ public class AIPlayer extends Player{
             System.out.println("A trump card was played");
             return true;
         }
+    }
+
+    public ArrayList<CardDescription> getHand() {
+       // ArrayList hands = new ArrayList<>();
+      //  ArrayList cards = new ArrayList<CardDescription>();
+      //  cards.set(0, bots[0].hand);
+      //  cards.set(1, bots[1].hand);
+      //  cards.set(2, bots[2].hand);
+      //  hands.add(cards);
+      //  hands.add(bots[2].hand);
+        return hand;
     }
 }

@@ -8,14 +8,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class STGame {
+    public static STGame currGame;
     public int numberOfPlayers;
     public static int dealerID;
     public static Deck deck;
     public static CardDescription card;
+    public static Player player;
 
     public STGame(int numberOfPlayers) throws IOException {
         this.numberOfPlayers = numberOfPlayers;
-        this.deck = new Deck();
+        deck = new Deck();
+        currGame = this;
+        player = new Player();
     }
 
     //Chooses which player will be the dealer from a random number in the range of players
@@ -43,17 +47,18 @@ public class STGame {
         System.out.println(Player.human.hand);
     }
     //Functions that are used to get the turns from the player and bots
-    public void playerFirstTurn() {
-        Player.human.playerFirstTurnPlayCard();
+    public void playerFirstTurn(CardDescription card) {
+        Player.human.playerFirstTurnPlayCard(card);
     }
 
     public void botFirstTurn(int firstPlayer) {
         AIPlayer.bots[firstPlayer].botFirstTurnPlayCard(firstPlayer);
     }
 
-    public void playerTurn(){
+    public CardDescription playerTurn(){
 
-        Player.human.playerPlayCard();
+        return Player.human.playerPlayCard(card);
+
     }
 
     public void botTurn(int i) {
@@ -78,4 +83,5 @@ public class STGame {
         }
         return gameOver;
     }
+
 }

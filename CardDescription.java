@@ -1,9 +1,12 @@
 /**
  * Created by Jack on 31/08/2016.
  */
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class CardDescription {
 
@@ -48,12 +51,7 @@ public class CardDescription {
         if (tryParseInt(firstAttrValue, secondAttrValue)) {
             double firstAttrValueInt = Double.parseDouble(firstAttrValue);
             double secondAttrValueInt = Double.parseDouble(secondAttrValue);
-            if (firstAttrValueInt <= secondAttrValueInt) {
-                compare = false;
-            }
-            else{
-                compare = true;
-            }
+            compare = firstAttrValueInt > secondAttrValueInt;
         }
         return compare;
     }
@@ -74,5 +72,17 @@ public class CardDescription {
         ImageIcon imgIcon = new ImageIcon(scaledImg);
         return imgIcon;
     }
+
+    public ImageIcon getCardBack() throws IOException {
+        Image imgIcon = ImageIO.read(new File("CardBack.jpg"));
+        Image scaledImg = imgIcon.getScaledInstance(40, 70, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImg);
+    }
+
+    public ImageIcon getDeckImage() {
+        Image scaledImg = cardPicture.getScaledInstance(300, 340, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImg);
+    }
 }
+
 
